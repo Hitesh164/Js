@@ -5,11 +5,25 @@ const getNotes=require('./notes.js');
 ///const command=process.argv[2];
 //console.log(process.argv);
 //console.log(yargs.argv);
+yargs.version ('1.1.0');
 yargs.command({
     command: 'add',
-    description: 'add a new note',
-    handler : function(){
-        console.log("Adding a new note");
+    describe: 'add a new note',
+    builder: {
+        title: {
+            describe: 'Note Title',
+            demandOption: true,
+            type: "string"
+        },
+        body: {
+            describe: 'Note body',
+            demandOption: true,
+            type: "string"
+        }
+    },
+    handler : function(argv){
+        console.log('Title:' + argv.title);
+        console.log('Body:' + argv.body);
     }
 })
 yargs.command({
@@ -37,7 +51,8 @@ yargs.command({
         console.log("reading  the note");
     }
 })
-console.log(yargs.argv)
+yargs.parse();
+//console.log(yargs.argv)
 
 
 
