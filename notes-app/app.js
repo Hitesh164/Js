@@ -1,7 +1,7 @@
 const validator=require('validator');
 const yargs=require('yargs');
 const chalk=require('chalk');
-const getNotes=require('./notes.js');
+const notes=require('./notes.js');
 ///const command=process.argv[2];
 //console.log(process.argv);
 //console.log(yargs.argv);
@@ -22,8 +22,7 @@ yargs.command({
         }
     },
     handler : function(argv){
-        console.log('Title:' + argv.title);
-        console.log('Body:' + argv.body);
+        notes.addNote(argv.title, argv.body);
     }
 })
 yargs.command({
