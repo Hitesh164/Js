@@ -21,33 +21,50 @@ yargs.command({
             type: "string"
         }
     },
-    handler : function(argv){
+    handler(argv)  {
         notes.addNote(argv.title, argv.body);
     }
 })
 yargs.command({
     command: 'remove',
     description: 'remove a  note',
-    handler : function(){
-        console.log("ramoving a note");
+    builder: {
+        title: {
+            describe: 'Remove Note',
+            demandOption: true,
+            type: "string"
+        }
+    },
+    handler(argv){
+        notes.removeNote(argv.title);
+        //console.log("ramoving a note");
     }
 })
 
 yargs.command({
     command: "List",
     description: "List the note",
-    handler: function()
+    handler()
     {
-        console.log("Listing the note");
+       
+        notes.listNotes();
     }
 })
 
 yargs.command({
     command: "read",
     description: "read the note",
-    handler: function()
+    builder: {
+        title: {
+            describe: 'Read Note',
+            demandOption: true,
+            type: "string"
+        }
+    },
+    handler(argv)
     {
-        console.log("reading  the note");
+        notes.readNote(argv.title);
+       // console.log("reading  the note");
     }
 })
 yargs.parse();
